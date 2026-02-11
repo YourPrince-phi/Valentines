@@ -1,134 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Valentine's Day ❤️</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Cinco Family ❤️</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      min-height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      overflow: hidden;
-    }
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      padding: 3rem;
-      border-radius: 20px;
-      text-align: center;
-      max-width: 420px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      position: relative;
-      z-index: 2;
-    }
+/* Card */
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 3rem;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 450px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.3);
+  position: relative;
+  z-index: 5;
+  transition: 0.4s ease;
+}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
 
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      opacity: 0.95;
-    }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+  animation: glow 2s ease-in-out infinite alternate;
+}
 
-    button {
-      background: #fff;
-      color: #ff4f81;
-      border: none;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+@keyframes glow {
+  from { text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+  to { text-shadow: 0 0 25px rgba(255,255,255,1); }
+}
 
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
+p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
 
-    /* Floating hearts */
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      transform: rotate(45deg);
-      animation: float 8s infinite ease-in;
-      opacity: 0.6;
-    }
+button {
+  background: #fff;
+  color: #ff4f81;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
 
-    .heart::before,
-    .heart::after {
-      content: '';
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      border-radius: 50%;
-      position: absolute;
-    }
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
 
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
+#loveMessage {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.5s ease;
+}
 
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
+#loveMessage.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    @keyframes float {
-      0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 0;
-      }
-      20% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-120vh) rotate(45deg);
-        opacity: 0;
-      }
-    }
-  </style>
+/* Floating Hearts */
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: white;
+  transform: rotate(45deg);
+  animation: float 10s infinite linear;
+  opacity: 0.5;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before { top: -10px; left: 0; }
+.heart::after { left: -10px; top: 0; }
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+  20% { opacity: 0.6; }
+  100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+}
+
+/* Falling Rose Petals */
+.petal {
+  position: absolute;
+  top: -10px;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle at 30% 30%, #ff4f81, #c2185b);
+  border-radius: 50% 0 50% 50%;
+  transform: rotate(45deg);
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>Happy Valentine’s Day ❤️</h1>
-    <p>
-      Every moment with you feels like a love story I never want to end.
-    </p>
-    <button onclick="alert('💖 You are loved more than words can say!')">
-      Send Love
-    </button>
-  </div>
+<div class="card">
+  <h1>Happy Valentine’s Day, Cinco Family ❤️</h1>
+  <p>
+    Cinco Family, you are the most beautiful chapter in my life.
+    Every heartbeat whispers your name.
+  </p>
+  <button onclick="showLove()">Send My Love 💌</button>
 
-  <!-- Hearts -->
-  <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
-  <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
-  <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
-  <div class="heart" style="left: 70%; animation-delay: 1s;"></div>
-  <div class="heart" style="left: 90%; animation-delay: 3s;"></div>
+  <div id="loveMessage">
+    🌹 Cinco Family, you are my today, my tomorrow, and my forever. 💖
+  </div>
+</div>
+
+<!-- Floating Hearts -->
+<div class="heart" style="left:10%; animation-delay:0s;"></div>
+<div class="heart" style="left:30%; animation-delay:2s;"></div>
+<div class="heart" style="left:50%; animation-delay:4s;"></div>
+<div class="heart" style="left:70%; animation-delay:1s;"></div>
+<div class="heart" style="left:90%; animation-delay:3s;"></div>
+
+<!-- Rose Petals -->
+<div class="petal" style="left:15%; animation-duration:8s;"></div>
+<div class="petal" style="left:35%; animation-duration:10s;"></div>
+<div class="petal" style="left:55%; animation-duration:7s;"></div>
+<div class="petal" style="left:75%; animation-duration:9s;"></div>
+<div class="petal" style="left:85%; animation-duration:11s;"></div>
+
+<script>
+function showLove() {
+  document.getElementById("loveMessage").classList.add("show");
+}
+</script>
 
 </body>
 </html>
