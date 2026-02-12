@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For Cinco Family ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
@@ -24,124 +24,106 @@ body {
   color: #fff;
   overflow: hidden;
   position: relative;
+
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.4); }
 }
 
 /* Card */
 .card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
   padding: 3rem;
-  border-radius: 25px;
+  border-radius: 30px;
   text-align: center;
-  max-width: 450px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.3);
-  position: relative;
-  z-index: 5;
-  transition: 0.4s ease;
+  max-width: 500px;
+  box-shadow: 0 0 60px rgba(255, 105, 180, 0.4);
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.02);
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.3rem;
+  font-size: 2.4rem;
   margin-bottom: 1rem;
-  animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px rgba(255,255,255,0.6); }
-  to { text-shadow: 0 0 25px rgba(255,255,255,1); }
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 p {
-  font-size: 1.1rem;
   margin-bottom: 2rem;
-  opacity: 0.95;
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
+/* Button */
 button {
-  background: #fff;
-  color: #ff4f81;
+  padding: 0.9rem 2.3rem;
   border: none;
-  padding: 0.8rem 2rem;
+  border-radius: 40px;
+  background: linear-gradient(45deg, #ff4f81, #ff85a2);
+  color: white;
   font-size: 1rem;
-  border-radius: 30px;
   cursor: pointer;
   transition: 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
 }
 
 button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transform: scale(1.1);
 }
 
+/* Typewriter Message */
 #loveMessage {
-  margin-top: 1.5rem;
-  font-size: 1.1rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: 0.5s ease;
-}
-
-#loveMessage.show {
-  opacity: 1;
-  transform: translateY(0);
+  margin-top: 1.8rem;
+  font-size: 1.2rem;
+  min-height: 60px;
 }
 
 /* Floating Hearts */
 .heart {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background: white;
+  width: 15px;
+  height: 15px;
+  background: #ff4f81;
   transform: rotate(45deg);
-  animation: float 10s infinite linear;
-  opacity: 0.5;
+  animation: floatUp 4s linear forwards;
 }
 
 .heart::before,
 .heart::after {
   content: '';
-  width: 20px;
-  height: 20px;
-  background: white;
+  width: 15px;
+  height: 15px;
+  background: #ff4f81;
   border-radius: 50%;
   position: absolute;
 }
 
-.heart::before { top: -10px; left: 0; }
-.heart::after { left: -10px; top: 0; }
+.heart::before { top: -7px; left: 0; }
+.heart::after { left: -7px; top: 0; }
 
-@keyframes float {
-  0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
-  20% { opacity: 0.6; }
-  100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
-}
-
-/* Falling Rose Petals */
-.petal {
-  position: absolute;
-  top: -10px;
-  width: 15px;
-  height: 15px;
-  background: radial-gradient(circle at 30% 30%, #ff4f81, #c2185b);
-  border-radius: 50% 0 50% 50%;
-  transform: rotate(45deg);
-  animation: fall linear infinite;
-  opacity: 0.8;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-10px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg);
-  }
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) rotate(45deg); }
+  100% { opacity: 0; transform: translateY(-200px) rotate(45deg); }
 }
 </style>
 </head>
@@ -149,35 +131,59 @@ button:hover {
 <body>
 
 <div class="card">
-  <h1>Happy Valentine’s Day, Cinco Family ❤️</h1>
-  <p>
-    Cinco Family, you are the most beautiful chapter in my life.
-    Every heartbeat whispers your name.
-  </p>
-  <button onclick="showLove()">Send My Love 💌</button>
+  <h1>Happy Valentine’s Day, Melody Hemocilla ❤️</h1>
+  
 
-  <div id="loveMessage">
-    🌹 Cinco Family, you are my today, my tomorrow, and my forever. 💖
-  </div>
+  <button onclick="startLove()">Open My Heart 💌</button>
+
+  <div id="loveMessage"></div>
 </div>
 
-<!-- Floating Hearts -->
-<div class="heart" style="left:10%; animation-delay:0s;"></div>
-<div class="heart" style="left:30%; animation-delay:2s;"></div>
-<div class="heart" style="left:50%; animation-delay:4s;"></div>
-<div class="heart" style="left:70%; animation-delay:1s;"></div>
-<div class="heart" style="left:90%; animation-delay:3s;"></div>
-
-<!-- Rose Petals -->
-<div class="petal" style="left:15%; animation-duration:8s;"></div>
-<div class="petal" style="left:35%; animation-duration:10s;"></div>
-<div class="petal" style="left:55%; animation-duration:7s;"></div>
-<div class="petal" style="left:75%; animation-duration:9s;"></div>
-<div class="petal" style="left:85%; animation-duration:11s;"></div>
+<!-- Background Music (Replace with your own mp3 link if you want) -->
+<audio id="bgMusic" loop>
+  <source src="your-music.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-function showLove() {
-  document.getElementById("loveMessage").classList.add("show");
+/* Generate Stars */
+for (let i = 0; i < 60; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDelay = Math.random() * 2 + "s";
+  document.body.appendChild(star);
+}
+
+/* Typewriter Effect */
+const message = "🌹Take care :)  💖";
+let index = 0;
+
+function typeWriter() {
+  if (index < message.length) {
+    document.getElementById("loveMessage").innerHTML += message.charAt(index);
+    index++;
+    setTimeout(typeWriter, 50);
+  }
+}
+
+function startLove() {
+  document.getElementById("loveMessage").innerHTML = "";
+  index = 0;
+  typeWriter();
+
+  document.getElementById("bgMusic").play().catch(()=>{});
+
+  /* Heart Burst */
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = (window.innerWidth/2 + Math.random()*100 - 50) + "px";
+    heart.style.top = (window.innerHeight/2 + Math.random()*50) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }
 }
 </script>
 
