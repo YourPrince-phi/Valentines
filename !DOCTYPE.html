@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Cinco Family ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.4); }
+}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  padding: 3rem;
+  border-radius: 30px;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 0 60px rgba(255, 105, 180, 0.4);
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Button */
+button {
+  padding: 0.9rem 2.3rem;
+  border: none;
+  border-radius: 40px;
+  background: linear-gradient(45deg, #ff4f81, #ff85a2);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Typewriter Message */
+#loveMessage {
+  margin-top: 1.8rem;
+  font-size: 1.2rem;
+  min-height: 60px;
+}
+
+/* Floating Hearts */
+.heart {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #ff4f81;
+  transform: rotate(45deg);
+  animation: floatUp 4s linear forwards;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background: #ff4f81;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before { top: -7px; left: 0; }
+.heart::after { left: -7px; top: 0; }
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) rotate(45deg); }
+  100% { opacity: 0; transform: translateY(-200px) rotate(45deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Happy Valentine’s Day, Melody Hemocilla ❤️</h1>
+  
+
+  <button onclick="startLove()">Open My Heart 💌</button>
+
+  <div id="loveMessage"></div>
+</div>
+
+<!-- Background Music (Replace with your own mp3 link if you want) -->
+<audio id="bgMusic" loop>
+  <source src="your-music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* Generate Stars */
+for (let i = 0; i < 60; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDelay = Math.random() * 2 + "s";
+  document.body.appendChild(star);
+}
+
+/* Typewriter Effect */
+const message = "🌹Take care :)  💖";
+let index = 0;
+
+function typeWriter() {
+  if (index < message.length) {
+    document.getElementById("loveMessage").innerHTML += message.charAt(index);
+    index++;
+    setTimeout(typeWriter, 50);
+  }
+}
+
+function startLove() {
+  document.getElementById("loveMessage").innerHTML = "";
+  index = 0;
+  typeWriter();
+
+  document.getElementById("bgMusic").play().catch(()=>{});
+
+  /* Heart Burst */
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = (window.innerWidth/2 + Math.random()*100 - 50) + "px";
+    heart.style.top = (window.innerHeight/2 + Math.random()*50) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }
+}
+</script>
+
+</body>
+</html>
