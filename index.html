@@ -8,13 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* ===== BACKGROUND ===== */
 body {
+  margin: 0;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #ff758c, #ff7eb3);
@@ -24,10 +20,9 @@ body {
   color: #fff;
   overflow: hidden;
   position: relative;
-
 }
 
-/* Stars */
+/* ===== STARS ===== */
 .star {
   position: absolute;
   width: 3px;
@@ -35,6 +30,7 @@ body {
   background: white;
   border-radius: 50%;
   animation: twinkle 2s infinite alternate;
+  box-shadow: 0 0 8px white;
 }
 
 @keyframes twinkle {
@@ -42,7 +38,7 @@ body {
   to { opacity: 1; transform: scale(1.4); }
 }
 
-/* Card */
+/* ===== CARD ===== */
 .card {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(20px);
@@ -53,6 +49,7 @@ body {
   box-shadow: 0 0 60px rgba(255, 105, 180, 0.4);
   animation: fadeIn 2s ease forwards;
   opacity: 0;
+  z-index: 10;
 }
 
 @keyframes fadeIn {
@@ -68,13 +65,6 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
-p {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-
-/* Button */
 button {
   padding: 0.9rem 2.3rem;
   border: none;
@@ -91,14 +81,39 @@ button:hover {
   transform: scale(1.1);
 }
 
-/* Typewriter Message */
 #loveMessage {
   margin-top: 1.8rem;
   font-size: 1.2rem;
   min-height: 60px;
 }
 
-/* Floating Hearts */
+/* ===== FLOATING HEARTS & FLOWERS ===== */
+.hearts, .flowers {
+  position: fixed;
+  width: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hearts span, .flowers span {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.9;
+  text-shadow: 0 0 6px #fff;
+}
+
+/* Animations */
+@keyframes floatUpMagic {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-110vh) rotate(360deg) scale(1.5); opacity: 0; }
+}
+
+@keyframes fallDownMagic {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+/* ===== BUTTON BURST HEARTS ===== */
 .heart {
   position: absolute;
   width: 15px;
@@ -108,8 +123,7 @@ button:hover {
   animation: floatUp 4s linear forwards;
 }
 
-.heart::before,
-.heart::after {
+.heart::before, .heart::after {
   content: '';
   width: 15px;
   height: 15px;
@@ -130,22 +144,26 @@ button:hover {
 
 <body>
 
+<!-- CARD -->
 <div class="card">
   <h1>Happy Valentine’s Day, Melody Hemocilla ❤️</h1>
-  
-
   <button onclick="startLove()">Open My Heart 💌</button>
-
   <div id="loveMessage"></div>
 </div>
 
-<!-- Background Music (Replace with your own mp3 link if you want) -->
+<!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" loop>
-  <source src="your-music.mp3" type="audio/mpeg">
+  <source src="ikigai.mp3" type="audio/mpeg">
 </audio>
 
+<!-- BACKGROUND FLOATING HEARTS -->
+<div class="hearts"></div>
+
+<!-- FALLING FLOWERS -->
+<div class="flowers"></div>
+
 <script>
-/* Generate Stars */
+/* ===== STARS ===== */
 for (let i = 0; i < 60; i++) {
   let star = document.createElement("div");
   star.className = "star";
@@ -155,10 +173,31 @@ for (let i = 0; i < 60; i++) {
   document.body.appendChild(star);
 }
 
-/* Typewriter Effect */
-const message = "🌹Take care :)  💖";
-let index = 0;
+/* ===== RANDOM BACKGROUND HEARTS ===== */
+const heartsContainer = document.querySelector(".hearts");
+for (let i = 0; i < 15; i++) {
+  let heart = document.createElement("span");
+  heart.textContent = "💖";
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.fontSize = (15 + Math.random() * 15) + "px";
+  heart.style.animation = `floatUpMagic ${6 + Math.random()*6}s linear infinite`;
+  heartsContainer.appendChild(heart);
+}
 
+/* ===== RANDOM FALLING FLOWERS ===== */
+const flowersContainer = document.querySelector(".flowers");
+for (let i = 0; i < 15; i++) {
+  let flower = document.createElement("span");
+  flower.textContent = "🌸";
+  flower.style.left = Math.random() * 100 + "%";
+  flower.style.fontSize = (15 + Math.random() * 15) + "px";
+  flower.style.animation = `fallDownMagic ${6 + Math.random()*6}s linear infinite`;
+  flowersContainer.appendChild(flower);
+}
+
+/* ===== TYPEWRITER ===== */
+const message = "🌹Take care :) 💖";
+let index = 0;
 function typeWriter() {
   if (index < message.length) {
     document.getElementById("loveMessage").innerHTML += message.charAt(index);
@@ -167,21 +206,22 @@ function typeWriter() {
   }
 }
 
+/* ===== BUTTON BURST HEARTS ===== */
 function startLove() {
   document.getElementById("loveMessage").innerHTML = "";
   index = 0;
   typeWriter();
 
-  document.getElementById("bgMusic").play().catch(()=>{});
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.4;
+  music.play().catch(error => console.log("Music play failed:", error));
 
-  /* Heart Burst */
   for (let i = 0; i < 20; i++) {
     let heart = document.createElement("div");
     heart.className = "heart";
     heart.style.left = (window.innerWidth/2 + Math.random()*100 - 50) + "px";
     heart.style.top = (window.innerHeight/2 + Math.random()*50) + "px";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 4000);
   }
 }
