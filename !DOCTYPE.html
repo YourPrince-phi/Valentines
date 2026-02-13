@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-/* ===== BACKGROUND ===== */
 body {
   margin: 0;
   min-height: 100vh;
@@ -22,7 +21,7 @@ body {
   position: relative;
 }
 
-/* ===== STARS ===== */
+/* Stars */
 .star {
   position: absolute;
   width: 3px;
@@ -32,13 +31,12 @@ body {
   animation: twinkle 2s infinite alternate;
   box-shadow: 0 0 8px white;
 }
-
 @keyframes twinkle {
   from { opacity: 0.3; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1.4); }
 }
 
-/* ===== CARD ===== */
+/* Card */
 .card {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(20px);
@@ -51,11 +49,9 @@ body {
   opacity: 0;
   z-index: 10;
 }
-
 @keyframes fadeIn {
   to { opacity: 1; transform: translateY(0); }
 }
-
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 2.4rem;
@@ -76,10 +72,7 @@ button {
   transition: 0.3s ease;
   box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
 }
-
-button:hover {
-  transform: scale(1.1);
-}
+button:hover { transform: scale(1.1); }
 
 #loveMessage {
   margin-top: 1.8rem;
@@ -87,14 +80,13 @@ button:hover {
   min-height: 60px;
 }
 
-/* ===== FLOATING HEARTS & FLOWERS ===== */
+/* Floating hearts & flowers */
 .hearts, .flowers {
   position: fixed;
   width: 100%;
   pointer-events: none;
   z-index: 1;
 }
-
 .hearts span, .flowers span {
   position: absolute;
   font-size: 20px;
@@ -107,13 +99,12 @@ button:hover {
   0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
   100% { transform: translateY(-110vh) rotate(360deg) scale(1.5); opacity: 0; }
 }
-
 @keyframes fallDownMagic {
   0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
   100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0; }
 }
 
-/* ===== BUTTON BURST HEARTS ===== */
+/* Button burst hearts */
 .heart {
   position: absolute;
   width: 15px;
@@ -122,7 +113,6 @@ button:hover {
   transform: rotate(45deg);
   animation: floatUp 4s linear forwards;
 }
-
 .heart::before, .heart::after {
   content: '';
   width: 15px;
@@ -131,10 +121,8 @@ button:hover {
   border-radius: 50%;
   position: absolute;
 }
-
 .heart::before { top: -7px; left: 0; }
 .heart::after { left: -7px; top: 0; }
-
 @keyframes floatUp {
   0% { opacity: 1; transform: translateY(0) rotate(45deg); }
   100% { opacity: 0; transform: translateY(-200px) rotate(45deg); }
@@ -144,26 +132,23 @@ button:hover {
 
 <body>
 
-<!-- CARD -->
 <div class="card">
   <h1>Happy Valentine’s Day, Melody Hemocilla ❤️</h1>
   <button onclick="startLove()">Open My Heart 💌</button>
   <div id="loveMessage"></div>
 </div>
 
-<!-- BACKGROUND MUSIC -->
+<!-- Audio -->
 <audio id="bgMusic" loop>
-  <source src="ikigai.mp3" type="audio/mpeg">
+  <source src="assets/audio/ikigai.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
 
-<!-- BACKGROUND FLOATING HEARTS -->
 <div class="hearts"></div>
-
-<!-- FALLING FLOWERS -->
 <div class="flowers"></div>
 
 <script>
-/* ===== STARS ===== */
+// ===== Stars =====
 for (let i = 0; i < 60; i++) {
   let star = document.createElement("div");
   star.className = "star";
@@ -173,7 +158,7 @@ for (let i = 0; i < 60; i++) {
   document.body.appendChild(star);
 }
 
-/* ===== RANDOM BACKGROUND HEARTS ===== */
+// ===== Background floating hearts =====
 const heartsContainer = document.querySelector(".hearts");
 for (let i = 0; i < 15; i++) {
   let heart = document.createElement("span");
@@ -184,7 +169,7 @@ for (let i = 0; i < 15; i++) {
   heartsContainer.appendChild(heart);
 }
 
-/* ===== RANDOM FALLING FLOWERS ===== */
+// ===== Falling flowers =====
 const flowersContainer = document.querySelector(".flowers");
 for (let i = 0; i < 15; i++) {
   let flower = document.createElement("span");
@@ -195,7 +180,7 @@ for (let i = 0; i < 15; i++) {
   flowersContainer.appendChild(flower);
 }
 
-/* ===== TYPEWRITER ===== */
+// ===== Typewriter =====
 const message = "🌹Take care :) 💖";
 let index = 0;
 function typeWriter() {
@@ -206,21 +191,25 @@ function typeWriter() {
   }
 }
 
-/* ===== BUTTON BURST HEARTS ===== */
+// ===== Button click: hearts + music + typewriter =====
 function startLove() {
   document.getElementById("loveMessage").innerHTML = "";
   index = 0;
   typeWriter();
 
   const music = document.getElementById("bgMusic");
-  music.volume = 0.4;
-  music.play().catch(error => console.log("Music play failed:", error));
+  const playPromise = music.play();
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => console.log("Music is playing 🎵"))
+      .catch((error) => console.warn("Music play blocked, click button again.", error));
+  }
 
   for (let i = 0; i < 20; i++) {
     let heart = document.createElement("div");
     heart.className = "heart";
-    heart.style.left = (window.innerWidth/2 + Math.random()*100 - 50) + "px";
-    heart.style.top = (window.innerHeight/2 + Math.random()*50) + "px";
+    heart.style.left = (window.innerWidth / 2 + Math.random() * 100 - 50) + "px";
+    heart.style.top = (window.innerHeight / 2 + Math.random() * 50) + "px";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 4000);
   }
